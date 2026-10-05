@@ -1,0 +1,287 @@
+<title>歌劇院一日漫遊</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Jost:wght@400;500;600&display=swap">
+<style>
+/* Layout: couture lookbook — one narrow column, Didone headlines, a time rail in champagne; ink black and Gris Montaigne neutrals with a single bordeaux accent */
+:root{
+  --bg:#f3f1ee;           /* gris Montaigne, pale */
+  --surface:#fbfaf8;      /* ivoire */
+  --fg:#151316;           /* encre */
+  --muted:#6a6366;
+  --line:#dcd6d1;
+  --rouge:#7c1f2c;        /* bordeaux */
+  --rouge-soft:#f2e3e4;
+  --champagne:#946f3e;
+  --champagne-soft:#efe6d8;
+  --panel-bg:#151316;     /* inverted ink panel for alerts */
+  --panel-fg:#f3f1ee;
+  --panel-accent:#d9b98a;
+  --font-display:"Bodoni Moda", "Didot", "Times New Roman", serif;
+  --font-label:"Jost", "Futura", "Avenir Next", "Helvetica Neue", sans-serif;
+  --font-body:-apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Microsoft JhengHei", "Segoe UI", sans-serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#121013; --surface:#1b181b; --fg:#eeeae6; --muted:#a59d99; --line:#302b2e;
+    --rouge:#e08a95; --rouge-soft:#3b1e24; --champagne:#d8bb8c; --champagne-soft:#2d261b;
+    --panel-bg:#eeeae6; --panel-fg:#151316; --panel-accent:#7c1f2c; color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#121013; --surface:#1b181b; --fg:#eeeae6; --muted:#a59d99; --line:#302b2e;
+  --rouge:#e08a95; --rouge-soft:#3b1e24; --champagne:#d8bb8c; --champagne-soft:#2d261b;
+  --panel-bg:#eeeae6; --panel-fg:#151316; --panel-accent:#7c1f2c; color-scheme:dark;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--font-body);font-size:15px;line-height:1.7;padding:0 16px}
+.wrap{max-width:640px;margin:0 auto;padding-block:32px 64px;display:flex;flex-direction:column;gap:44px}
+a{color:var(--rouge);text-underline-offset:3px;text-decoration-thickness:1px}
+a:focus-visible,button:focus-visible{outline:2px solid var(--rouge);outline-offset:2px;border-radius:2px}
+
+header{display:flex;flex-direction:column;gap:12px;border-bottom:1px solid var(--fg);padding-bottom:22px}
+.eyebrow{font-family:var(--font-label);font-size:12px;letter-spacing:.28em;text-transform:uppercase;color:var(--muted);font-weight:500}
+h1{font-family:var(--font-display);font-weight:400;font-size:clamp(34px,9vw,52px);line-height:1.08;margin:0;text-wrap:balance;letter-spacing:-.01em}
+h1 em{display:block;font-style:italic;color:var(--rouge);font-size:.62em;letter-spacing:.02em}
+.lede{margin:0;color:var(--muted);max-width:60ch}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px}
+.chip{font-family:var(--font-label);font-size:12px;letter-spacing:.06em;padding:4px 12px;border:1px solid var(--fg);color:var(--fg);font-weight:500}
+.chip.tbd{border-style:dashed;border-color:var(--champagne);color:var(--champagne)}
+
+.section-head{display:flex;flex-direction:column;gap:2px;margin-bottom:16px}
+.kicker{font-family:var(--font-label);font-size:11px;letter-spacing:.3em;text-transform:uppercase;color:var(--rouge);font-weight:600}
+h2{font-family:var(--font-display);font-weight:400;font-size:28px;margin:0;text-wrap:balance}
+.section-note{margin:4px 0 0;color:var(--muted);font-size:14px}
+
+/* timeline */
+.timeline{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.stop{display:grid;grid-template-columns:62px 1fr;gap:0 16px}
+.time{font-family:var(--font-display);font-size:20px;color:var(--champagne);text-align:right;padding-top:1px;font-variant-numeric:tabular-nums lining-nums;line-height:1.3}
+.body{border-left:1px solid var(--line);padding:0 0 26px 20px;position:relative;min-width:0}
+.body::before{content:"";position:absolute;left:-4px;top:9px;width:7px;height:7px;transform:rotate(45deg);background:var(--bg);border:1px solid var(--fg)}
+.stop.key .body::before{background:var(--rouge);border-color:var(--rouge)}
+.stop:last-child .body{padding-bottom:0}
+.name{font-weight:600;font-size:16px;margin:0}
+.name a{color:var(--fg)}
+.name a:hover{color:var(--rouge)}
+.fr{font-family:var(--font-display);font-style:italic;color:var(--muted);font-size:15px;margin:0}
+.desc{margin:6px 0 0;max-width:60ch}
+.tips{margin:8px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px;font-size:14px;color:var(--muted)}
+.tips li{display:flex;gap:8px}
+.tips li::before{content:"—";color:var(--champagne);flex:none}
+.walk{font-family:var(--font-label);color:var(--muted);font-size:12px;letter-spacing:.06em;margin-top:12px;display:inline-flex;align-items:center;gap:8px}
+.walk::before{content:"";width:16px;border-top:1px dashed var(--muted)}
+.tbd-box{margin-top:6px;border:1px dashed var(--champagne);background:var(--champagne-soft);padding:12px 14px}
+.tbd-box p{margin:0}
+.tag{display:inline-block;font-family:var(--font-label);font-size:10px;letter-spacing:.18em;font-weight:600;color:var(--champagne);border:1px solid var(--champagne);padding:0 6px;margin-left:8px;vertical-align:2px}
+
+/* candidates */
+.cands{display:grid;grid-template-columns:1fr;gap:14px}
+.cand{background:var(--surface);border:1px solid var(--line);padding:18px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.cand.pick{border-color:var(--fg);box-shadow:4px 4px 0 var(--rouge-soft)}
+.cand-head{display:flex;align-items:baseline;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.cand h3{margin:0;font-family:var(--font-display);font-size:22px;font-weight:400}
+.badge{font-family:var(--font-label);font-size:11px;letter-spacing:.16em;font-weight:600;padding:2px 8px;background:var(--rouge);color:var(--surface)}
+.badge.alt{background:transparent;color:var(--champagne);border:1px solid var(--champagne)}
+.cand .where{margin:0;color:var(--muted);font-size:14px}
+.cand .why{margin:0}
+dl.facts{display:grid;grid-template-columns:auto 1fr;gap:2px 14px;margin:4px 0 0;font-size:14px}
+dl.facts dt{color:var(--muted)}
+dl.facts dd{margin:0;min-width:0;overflow-wrap:anywhere}
+.row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.btn{font-family:var(--font-label);font-size:12px;letter-spacing:.08em;font-weight:500;border:1px solid var(--fg);background:transparent;color:var(--fg);padding:7px 14px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn:hover{background:var(--fg);color:var(--bg)}
+.tel{font-variant-numeric:tabular-nums;user-select:all}
+
+/* notes */
+.notes{display:flex;flex-direction:column;gap:12px}
+.note{padding:16px 18px;background:var(--surface);border:1px solid var(--line)}
+.note.alert{background:var(--panel-bg);color:var(--panel-fg);border-color:var(--panel-bg)}
+.note h3{margin:0 0 6px;font-size:15px}
+.note.alert h3{color:var(--panel-accent);font-family:var(--font-label);letter-spacing:.12em;font-weight:600}
+.note ul{margin:0;padding-left:1.2em;display:flex;flex-direction:column;gap:4px}
+.note p{margin:0}
+footer{color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+.toast{position:fixed;left:50%;bottom:calc(20px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--fg);color:var(--bg);padding:8px 14px;font-size:13px;max-width:calc(100% - 32px)}
+@media (prefers-reduced-motion:no-preference){.btn,.name a{transition:background-color .15s,color .15s}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Mardi 6 octobre 2026 · Paris 9<sup>e</sup></div>
+    <h1>歌劇院一日漫遊<em>Une journée à l'Opéra</em></h1>
+    <p class="lede">以加尼葉宮為中心的步行行程，每段路都在 10 分鐘以內。整天都在歌劇院西南側，避開下午共和廣場的遊行。</p>
+    <div class="chips">
+      <span class="chip">加尼葉宮 13:30 入場</span>
+      <span class="chip">BeauCoCo 午餐 12:00</span>
+      <span class="chip">Le Grand Véfour 晚餐 19:00</span>
+    </div>
+  </header>
+
+  <section aria-labelledby="h-plan">
+    <div class="section-head">
+      <span class="kicker">Itinéraire</span>
+      <h2 id="h-plan">當天行程</h2>
+      <p class="section-note">時間是建議，可以依體力調整。地點名稱可以點開 Google 地圖導航。</p>
+    </div>
+    <ol class="timeline">
+      <li class="stop">
+        <div class="time">11:00</div>
+        <div class="body">
+          <p class="name"><a href="https://www.google.com/maps/search/?api=1&query=Galeries+Lafayette+Haussmann+Paris">老佛爺百貨圓頂與頂樓</a></p>
+          <p class="fr">Galeries Lafayette Haussmann</p>
+          <p class="desc">先在一樓仰拍彩繪玻璃圓頂，再搭電梯上頂樓。免費觀景台可以拍到歌劇院的綠色屋頂，遠處還有艾菲爾鐵塔。</p>
+          <div class="walk">步行約 4 分鐘（從頂樓下樓另留 5–10 分鐘）</div>
+        </div>
+      </li>
+      <li class="stop key">
+        <div class="time">12:00</div>
+        <div class="body">
+          <p class="name"><a href="https://www.google.com/maps/search/?api=1&query=BeauCoCo+1+place+Jacques+Rouch%C3%A9+Paris">BeauCoCo 午餐</a></p>
+          <p class="fr">1 place Jacques Rouché（歌劇院建築內）</p>
+          <p class="desc">1920 年代風格的餐廳，午餐時段有現場音樂。</p>
+          <ul class="tips">
+            <li>13:20 前用完餐，請服務生主菜一起上</li>
+            <li>訂位時可以指定室內座位</li>
+          </ul>
+          <div class="walk">繞過歌劇院正面到參觀入口，步行約 4 分鐘</div>
+        </div>
+      </li>
+      <li class="stop key">
+        <div class="time">13:30</div>
+        <div class="body">
+          <p class="name"><a href="https://www.google.com/maps/search/?api=1&query=Palais+Garnier+rue+Scribe+rue+Auber">加尼葉宮參觀</a></p>
+          <p class="fr">Palais Garnier</p>
+          <p class="desc">大階梯、大休息廳和夏卡爾天頂畫是拍照重點。大階梯建議從二樓欄杆往下拍。</p>
+          <ul class="tips">
+            <li>入口在 Scribe 街與 Auber 街轉角，不是餐廳那一側</li>
+            <li>預定時間後 30 分鐘內都能入場，14:00 前到就好</li>
+            <li>不能帶行李箱和旅行袋入內</li>
+          </ul>
+          <div class="walk">步行約 2 分鐘</div>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="time">15:15</div>
+        <div class="body">
+          <p class="name"><a href="https://www.google.com/maps/search/?api=1&query=Mus%C3%A9e+du+Parfum+Fragonard+9+rue+Scribe+Paris">Fragonard 香水博物館</a></p>
+          <p class="fr">Musée du Parfum Fragonard · 9 rue Scribe</p>
+          <p class="desc">免費參觀，可以順便坐下休息。</p>
+          <div class="walk">沿和平路步行約 8 分鐘</div>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="time">16:15</div>
+        <div class="body">
+          <p class="name"><a href="https://www.google.com/maps/search/?api=1&query=Place+Vend%C3%B4me+Paris">旺多姆廣場</a></p>
+          <p class="fr">Place Vendôme</p>
+          <p class="desc">廣場中央的銅柱和四周的珠寶精品店面都很上鏡。</p>
+          <div class="walk">經聖奧諾雷街步行約 12 分鐘</div>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="time">17:00</div>
+        <div class="body">
+          <p class="name"><a href="https://www.google.com/maps/search/?api=1&query=Jardin+du+Palais+Royal+Paris">皇家宮花園與布倫柱</a></p>
+          <p class="fr">Jardin du Palais-Royal · Colonnes de Buren</p>
+          <p class="desc">黑白條紋短柱是巴黎的人氣拍照點，花園拱廊下可以坐著休息。</p>
+          <div class="walk">步行約 2 分鐘</div>
+        </div>
+      </li>
+      <li class="stop">
+        <div class="time">18:15</div>
+        <div class="body">
+          <p class="name"><a href="https://www.google.com/maps/search/?api=1&query=Avenue+de+l%27Op%C3%A9ra+Paris">歌劇院大道</a></p>
+          <p class="fr">Avenue de l'Opéra</p>
+          <p class="desc">站在大道中央的安全島，拍歌劇院正面的經典構圖。傍晚光線最柔和。</p>
+          <div class="walk">穿過皇家宮花園步行約 7 分鐘</div>
+        </div>
+      </li>
+      <li class="stop key">
+        <div class="time">19:00</div>
+        <div class="body">
+          <p class="name"><a href="https://www.google.com/maps/search/?api=1&query=Le+Grand+V%C3%A9four+17+rue+de+Beaujolais+Paris">Le Grand Véfour 晚餐</a></p>
+          <p class="fr">17 rue de Beaujolais · Palais-Royal</p>
+          <p class="desc">1784 年開業的傳奇餐廳，位在皇家宮花園的拱廊下，拿破崙與約瑟芬、作家柯蕾特和考克多都曾是座上客。今年由主廚 Bruno Doucet 接手重新開幕。</p>
+          <ul class="tips">
+            <li>位在皇家宮花園北端，地址是 Beaujolais 街</li>
+            <li>走累了可以搭地鐵 7 號線，Opéra 到 Palais Royal 只有 2 站</li>
+          </ul>
+        </div>
+      </li>
+    </ol>
+  </section>
+
+  <section aria-labelledby="h-dinner" id="dinner">
+    <div class="section-head">
+      <span class="kicker">Le dîner</span>
+      <h2 id="h-dinner">晚餐</h2>
+    </div>
+    <div class="cands">
+      <article class="cand pick">
+        <div class="cand-head"><h3>Le Grand Véfour</h3><span class="badge">19:00</span></div>
+        <p class="where">皇家宮 · 17 rue de Beaujolais</p>
+        <p class="why">1784 年開業的傳奇餐廳，今年由主廚 Bruno Doucet 接手重新開幕。下午剛好會經過皇家宮，最順路。</p>
+        <dl class="facts">
+          <dt>週二晚餐</dt><dd>19:00–22:00</dd>
+          <dt>電話</dt><dd><span class="tel">01 42 96 56 27</span></dd>
+        </dl>
+        <div class="row">
+          <a class="btn" href="https://legrandvefour.com/">餐廳官網</a>
+          <button class="btn" type="button" data-copy="+33 1 42 96 56 27">複製電話</button>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section aria-labelledby="h-notes">
+    <div class="section-head">
+      <span class="kicker">À savoir</span>
+      <h2 id="h-notes">出發前提醒</h2>
+    </div>
+    <div class="notes">
+      <div class="note alert">
+        <h3>當天有抗議遊行</h3>
+        <ul>
+          <li>14:00 共和廣場（République）有學生與工會遊行</li>
+          <li>避開巴黎東邊：共和廣場、巴士底、民族廣場一帶</li>
+          <li>看到人群、警察封鎖線或煙霧就直接繞路，不要停下圍觀</li>
+        </ul>
+      </div>
+      <div class="note">
+        <h3>交通</h3>
+        <ul>
+          <li>早上出門前用 RATP 或 Île-de-France Mobilités App 確認地鐵狀況</li>
+          <li>走累了：皇家宮搭地鐵 7 號線到 Opéra 站只有 2 站</li>
+          <li>計程車每趟最低 €8，市區短程約 €10–15（一台車的價格，4 人內不加價）</li>
+        </ul>
+      </div>
+      <div class="note">
+        <h3>BeauCoCo 訂位</h3>
+        <p>電話 <span class="tel">01 42 68 86 80</span>。訂位時說明 13:30 要參觀歌劇院，需要 13:20 前用完餐。</p>
+        <div class="row"><button class="btn" type="button" data-copy="+33 1 42 68 86 80">複製電話</button></div>
+      </div>
+    </div>
+  </section>
+
+  <footer>資料整理於 2026 年 10 月 4 日。營業時間與遊行路線可能變動，出發前請再確認。</footer>
+</div>
+
+<div class="toast" id="toast" role="status" hidden></div>
+
+<script>
+(function(){
+  var toast=document.getElementById('toast'),t;
+  function show(msg){toast.textContent=msg;toast.hidden=false;clearTimeout(t);t=setTimeout(function(){toast.hidden=true},1800);}
+  document.querySelectorAll('[data-copy]').forEach(function(b){
+    b.addEventListener('click',function(){
+      var v=b.getAttribute('data-copy');
+      var fallback=function(){
+        var box=b.closest('.cand, .note');var s=box&&box.querySelector('.tel');
+        if(s){var r=document.createRange();r.selectNodeContents(s);var sel=window.getSelection();sel.removeAllRanges();sel.addRange(r);show('已選取號碼，請手動複製');}
+      };
+      try{navigator.clipboard.writeText(v).then(function(){show('已複製 '+v)},fallback);}catch(e){fallback();}
+    });
+  });
+})();
+</script>
